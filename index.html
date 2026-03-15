@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arifur Rahman — AI/ML Engineer & CS Student</title>
+  <meta name="description" content="Portfolio of Arifur Rahman, a CS student specializing in machine learning, computer vision, and data analysis. Built SmartDetect with 95%+ defect detection accuracy." />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="_next/static/css/90ee4f6aed672dee.css" />
+  <style>
+    /* Additional inline styles for JS-dependent behaviors */
+    .boot-line { opacity: 0; transition: opacity .3s ease; }
+    .boot-line.show { opacity: 1; }
+    .hero-main { opacity: 0; transform: translateY(2rem); transition: all 1s ease; }
+    .hero-main.show { opacity: 1; transform: translateY(0); }
+    #boot-overlay { transition: opacity .8s ease, visibility .8s ease; }
+    #boot-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .nav-scrolled { background-color: rgba(5,5,5,.95) !important; backdrop-filter: blur(4px); border-bottom: 1px solid rgba(0,255,65,.2); }
+    .mobile-menu { display: none; }
+    .mobile-menu.open { display: flex; }
+    /* Progress bar animation */
+    .progress-bar-fill { width: 0; transition: width 1.5s cubic-bezier(.25,.46,.45,.94); }
+    /* SmartDetect image detection boxes */
+    @keyframes detectionPulse {
+      0%,100% { opacity: .8; }
+      50% { opacity: 1; }
+    }
+    .detection-box {
+      position: absolute;
+      border: 1.5px solid var(--terminal-green);
+      box-shadow: 0 0 8px rgba(0,255,65,.4);
+      animation: detectionPulse 2s ease-in-out infinite;
+      border-radius: 2px;
+    }
+    .detection-label {
+      position: absolute;
+      top: -18px; left: 0;
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--terminal-green);
+      background: rgba(0,0,0,.7);
+      padding: 1px 5px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    /* Counter animation helper */
+    .counter-animate { font-variant-numeric: tabular-nums; }
+    /* Smooth scroll fix */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+
+<body>
+
+<main class="min-h-screen bg-bg-primary overflow-x-hidden">
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<header id="mainNav" class="fixed top-0 left-0 w-full z-[100] transition-all duration-500 bg-transparent">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <span class="font-mono text-terminal-green text-sm font-bold tracking-wider glow-green hidden sm:block">arifur@portfolio:~$</span>
+    </div>
+    <!-- Nav Links -->
+    <nav class="hidden md:flex items-center gap-1" id="desktopNav">
+      <a href="#projects" class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors px-3 py-2 border border-transparent hover:border-terminal-green/30 hover:bg-terminal-green/5 rounded-sm">./projects</a>
+      <a href="#stack" class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors px-3 py-2 border border-transparent hover:border-terminal-green/30 hover:bg-terminal-green/5 rounded-sm">./stack</a>
+      <a href="#stats" class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors px-3 py-2 border border-transparent hover:border-terminal-green/30 hover:bg-terminal-green/5 rounded-sm">./stats</a>
+      <a href="#contact" class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors px-3 py-2 border border-transparent hover:border-terminal-green/30 hover:bg-terminal-green/5 rounded-sm">./contact</a>
+    </nav>
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-3">
+      <a href="#contact" class="border-beam-wrapper font-mono text-xs font-bold text-bg-primary bg-terminal-green px-4 py-2 rounded-sm hover:bg-terminal-green/90 transition-all" style="border-radius:3px">./hire_me</a>
+      <button class="md:hidden flex flex-col gap-1.5 p-2" id="hamburgerBtn" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+        <span class="block w-5 h-0.5 bg-terminal-green transition-all"></span>
+        <span class="block w-5 h-0.5 bg-terminal-green transition-all"></span>
+        <span class="block w-5 h-0.5 bg-terminal-green transition-all"></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu md:hidden flex-col bg-bg-primary/95 border-t border-terminal-green/20 px-6 py-4 gap-2" id="mobileMenu">
+    <a href="#projects" class="font-mono text-xs text-terminal-muted hover:text-terminal-green py-2" onclick="document.getElementById('mobileMenu').classList.remove('open')">./projects</a>
+    <a href="#stack" class="font-mono text-xs text-terminal-muted hover:text-terminal-green py-2" onclick="document.getElementById('mobileMenu').classList.remove('open')">./stack</a>
+    <a href="#stats" class="font-mono text-xs text-terminal-muted hover:text-terminal-green py-2" onclick="document.getElementById('mobileMenu').classList.remove('open')">./stats</a>
+    <a href="#contact" class="font-mono text-xs text-terminal-muted hover:text-terminal-green py-2" onclick="document.getElementById('mobileMenu').classList.remove('open')">./contact</a>
+  </div>
+</header>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section id="hero" class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 overflow-hidden">
+  <!-- Ambient glow orbs -->
+  <div id="orb1" class="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(0,255,65,0.04) 0%,transparent 70%);filter:blur(60px);transition:transform .1s"></div>
+  <div id="orb2" class="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(255,176,0,0.03) 0%,transparent 70%);filter:blur(80px);transition:transform .1s"></div>
+
+  <!-- Boot Sequence Overlay -->
+  <div id="boot-overlay" class="absolute inset-0 flex flex-col items-center justify-center z-20 bg-bg-primary">
+    <div class="max-w-2xl w-full px-6" style="text-align:left">
+      <div class="boot-line font-mono text-xs text-terminal-dim mb-1">[SYSTEM BOOT] -- DataOS v1.0.0</div>
+      <div class="boot-line font-mono text-xs text-terminal-muted mb-1">BIOS v2.26.0 -- Initializing system...</div>
+      <div class="boot-line font-mono text-xs text-terminal-muted mb-1">Loading data pipeline modules...</div>
+      <div class="boot-line font-mono text-xs text-terminal-muted mb-1">Mounting datasets...</div>
+      <div class="boot-line font-mono text-xs text-terminal-green mb-1">[OK] Python 3.11 environment: ready</div>
+      <div class="boot-line font-mono text-xs text-terminal-green mb-1">[OK] Pandas &amp; NumPy: loaded</div>
+      <div class="boot-line font-mono text-xs text-terminal-green mb-1">[OK] Power BI connector: active</div>
+      <div class="boot-line font-mono text-xs text-terminal-muted mb-1">Authenticating user: arifur_rahman...</div>
+      <div class="boot-line font-mono text-xs text-terminal-amber mb-1 glow-amber">[ACCESS GRANTED] Welcome, Data Analyst.</div>
+    </div>
+  </div>
+
+  <!-- Hero Main Content -->
+  <div class="hero-main relative z-10 max-w-6xl w-full mx-auto text-center">
+    <!-- Status badge -->
+    <div class="mb-8 flex justify-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 border border-terminal-green/30 bg-terminal-green/5 rounded-sm font-mono text-xs text-terminal-muted">
+        <span class="w-1.5 h-1.5 rounded-full bg-terminal-green dot-pulse"></span>
+        Available for opportunities &middot; Hooghly, West Bengal, India
+      </div>
+    </div>
+
+    <!-- Name -->
+    <h1 class="font-mono font-bold leading-none tracking-tighter crt-flicker glitch-text mb-6" data-text="ARIFUR RAHMAN" style="font-size:clamp(3rem, 10vw, 9rem);color:var(--terminal-green);text-shadow:var(--glow-green)">ARIFUR RAHMAN</h1>
+
+    <!-- Typewriter subtitle -->
+    <div class="font-mono text-lg md:text-2xl text-terminal-amber mb-12" style="text-shadow:var(--glow-amber)">
+      <span class="text-terminal-dim">$ whoami -&gt; </span>
+      <span id="typewriter-text"></span>
+      <span class="cursor-blink"></span>
+    </div>
+
+    <!-- Terminal Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-12 max-w-5xl mx-auto">
+      <!-- Left terminal -->
+      <div class="hidden lg:block float-1" style="transform:rotate(-1deg)">
+        <div class="terminal-window">
+          <div class="terminal-titlebar">
+            <div class="terminal-dot" style="background:#ff5f57"></div>
+            <div class="terminal-dot" style="background:#ffbd2e"></div>
+            <div class="terminal-dot" style="background:#28ca42"></div>
+            <span class="font-mono text-xs text-terminal-dim ml-2">analytics_stats.sh</span>
+          </div>
+          <div class="terminal-content">
+            <div class="space-y-2 font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <span class="text-terminal-muted" style="min-width:120px">detection_accuracy</span>
+                <div class="flex-1 h-2 rounded-full overflow-hidden" style="background:rgba(0,255,65,.1)">
+                  <div style="width:95%;height:100%;background:linear-gradient(90deg,rgba(0,255,65,.4),var(--terminal-green));border-radius:9999px"></div>
+                </div>
+                <span class="text-terminal-green" style="min-width:35px;text-align:right">95%+</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-terminal-muted" style="min-width:120px">manual_reduction</span>
+                <div class="flex-1 h-2 rounded-full overflow-hidden" style="background:rgba(255,176,0,.1)">
+                  <div style="width:80%;height:100%;background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber));border-radius:9999px"></div>
+                </div>
+                <span class="text-terminal-amber" style="min-width:35px;text-align:right">80%</span>
+              </div>
+              <div class="text-terminal-dim mt-3">projects: 2 &middot; certs: 3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center terminal (profile.json) -->
+      <div>
+        <div class="terminal-window glow-border-green" style="box-shadow:0 0 30px rgba(0,255,65,0.12)">
+          <div class="terminal-titlebar">
+            <div class="terminal-dot" style="background:#ff5f57"></div>
+            <div class="terminal-dot" style="background:#ffbd2e"></div>
+            <div class="terminal-dot" style="background:#28ca42"></div>
+            <span class="font-mono text-xs text-terminal-dim ml-2">profile.json</span>
+          </div>
+          <div class="terminal-content">
+            <pre class="font-mono text-xs leading-relaxed"><span class="text-terminal-dim">{</span>
+  <span class="text-terminal-amber">"name"</span>: <span class="text-terminal-green">"Arifur Rahman"</span>,
+  <span class="text-terminal-amber">"degree"</span>: <span class="text-terminal-green">"B.Tech CSE"</span>,
+  <span class="text-terminal-amber">"year"</span>: <span class="text-terminal-green">"2022-2026"</span>,
+  <span class="text-terminal-amber">"focus"</span>: [
+    <span class="text-terminal-green">"Data Analytics"</span>,
+    <span class="text-terminal-green">"Power BI"</span>,
+    <span class="text-terminal-green">"Python &amp; SQL"</span>
+  ],
+  <span class="text-terminal-amber">"status"</span>: <span class="text-terminal-green">"open_to_work"</span>
+<span class="text-terminal-dim">}</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right terminal -->
+      <div class="hidden lg:block float-2" style="transform:rotate(1deg)">
+        <div class="terminal-window">
+          <div class="terminal-titlebar">
+            <div class="terminal-dot" style="background:#ff5f57"></div>
+            <div class="terminal-dot" style="background:#ffbd2e"></div>
+            <div class="terminal-dot" style="background:#28ca42"></div>
+            <span class="font-mono text-xs text-terminal-dim ml-2">data_tools.log</span>
+          </div>
+          <div class="terminal-content">
+            <div class="space-y-2 font-mono text-xs">
+              <div class="flex items-center gap-2"><span class="text-terminal-muted" style="min-width:70px">Python</span><div class="flex-1 h-2 rounded-full overflow-hidden" style="background:rgba(0,255,65,.1)"><div style="width:90%;height:100%;background:linear-gradient(90deg,rgba(0,255,65,.4),var(--terminal-green));border-radius:9999px"></div></div><span class="text-terminal-dim" style="min-width:30px;text-align:right">90%</span></div>
+              <div class="flex items-center gap-2"><span class="text-terminal-muted" style="min-width:70px">Pandas</span><div class="flex-1 h-2 rounded-full overflow-hidden" style="background:rgba(0,255,65,.1)"><div style="width:88%;height:100%;background:linear-gradient(90deg,rgba(0,255,65,.4),var(--terminal-green));border-radius:9999px"></div></div><span class="text-terminal-dim" style="min-width:30px;text-align:right">88%</span></div>
+              <div class="flex items-center gap-2"><span class="text-terminal-muted" style="min-width:70px">Power BI</span><div class="flex-1 h-2 rounded-full overflow-hidden" style="background:rgba(255,176,0,.1)"><div style="width:80%;height:100%;background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber));border-radius:9999px"></div></div><span class="text-terminal-dim" style="min-width:30px;text-align:right">80%</span></div>
+              <div class="flex items-center gap-2"><span class="text-terminal-muted" style="min-width:70px">SQL</span><div class="flex-1 h-2 rounded-full overflow-hidden" style="background:rgba(255,176,0,.1)"><div style="width:75%;height:100%;background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber));border-radius:9999px"></div></div><span class="text-terminal-dim" style="min-width:30px;text-align:right">75%</span></div>
+              <div class="flex items-center gap-2"><span class="text-terminal-muted" style="min-width:70px">NumPy</span><div class="flex-1 h-2 rounded-full overflow-hidden" style="background:rgba(0,255,65,.1)"><div style="width:85%;height:100%;background:linear-gradient(90deg,rgba(0,255,65,.4),var(--terminal-green));border-radius:9999px"></div></div><span class="text-terminal-dim" style="min-width:30px;text-align:right">85%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+      <a href="#projects" class="border-beam-wrapper group inline-flex items-center gap-3 bg-terminal-green/10 border border-terminal-green/50 text-terminal-green font-mono text-sm px-8 py-4 rounded-sm hover:bg-terminal-green/20 transition-all">
+        <span class="text-terminal-dim">$ </span>./view_projects <span class="group-hover:translate-x-1 transition-transform text-terminal-dim">-&gt;</span>
+      </a>
+      <a href="#contact" class="inline-flex items-center gap-3 border border-terminal-amber/40 text-terminal-amber font-mono text-sm px-8 py-4 rounded-sm hover:bg-terminal-amber/10 hover:border-terminal-amber/70 transition-all">
+        <span class="text-terminal-dim">$ </span>./send_message <span class="text-terminal-dim">-&gt;</span>
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="flex flex-col items-center gap-3">
+      <span class="font-mono text-xs text-terminal-dim">scroll_down</span>
+      <div class="w-px h-12 relative overflow-hidden" style="background:rgba(0,255,65,.15)">
+        <div style="position:absolute;left:0;width:100%;height:10px;background:var(--terminal-green);box-shadow:var(--glow-green);animation:matrixFall 2s ease-in-out infinite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PROJECTS ═══════════════════ -->
+<section id="projects" class="py-32 px-6 relative overflow-hidden">
+  <div class="section-watermark">PROJECTS</div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="reveal-on-scroll mb-12">
+      <div class="font-mono text-xs text-terminal-dim mb-2">$ ls -la ~/data_analytics_projects/</div>
+      <h2 class="font-mono font-bold text-3xl md:text-5xl text-terminal-green glow-green mb-3">./data_analytics_projects</h2>
+      <div class="font-mono text-xs text-terminal-dim">total 2 &middot; drwxr-xr-x &middot; last modified: 2025</div>
+    </div>
+
+    <div class="bento-grid">
+      <!-- SmartDetect FEATURED -->
+      <div class="bento-featured reveal-on-scroll">
+        <div class="terminal-window glow-border-green">
+          <div class="terminal-titlebar">
+            <div class="terminal-dot" style="background:#ff5f57"></div>
+            <div class="terminal-dot" style="background:#ffbd2e"></div>
+            <div class="terminal-dot" style="background:#28ca42"></div>
+            <span class="font-mono text-xs text-terminal-dim ml-2">SmartDetect/</span>
+            <span class="ml-auto font-mono text-xs font-bold text-terminal-green px-2 py-0.5 border border-terminal-green/40 rounded-sm bg-terminal-green/10">FEATURED</span>
+          </div>
+          <!-- Image area -->
+          <div class="relative h-52 overflow-hidden" style="background:#080a0c">
+            <!-- SVG abstract visualization -->
+            <svg viewBox="0 0 700 208" style="width:100%;height:100%;opacity:.6;filter:saturate(0.4) hue-rotate(100deg) brightness(0.7)">
+              <rect fill="#0a0a0c" width="700" height="208"/>
+              <g stroke="#1a2520" stroke-width=".5"><line x1="0" y1="40" x2="700" y2="40"/><line x1="0" y1="80" x2="700" y2="80"/><line x1="0" y1="120" x2="700" y2="120"/><line x1="0" y1="160" x2="700" y2="160"/><line x1="140" y1="0" x2="140" y2="208"/><line x1="280" y1="0" x2="280" y2="208"/><line x1="420" y1="0" x2="420" y2="208"/><line x1="560" y1="0" x2="560" y2="208"/></g>
+              <g fill="none" stroke-width="2"><polyline points="20,170 80,140 160,100 240,130 320,60 400,85 480,40 560,70 640,50 680,35" stroke="#00ff41" opacity=".8"/><polyline points="20,180 80,160 160,140 240,150 320,110 400,125 480,95 560,110 640,90 680,80" stroke="#ffb000" stroke-dasharray="6,4" opacity=".5"/></g>
+              <g fill="#00ff41" opacity=".9"><circle cx="160" cy="100" r="3.5"/><circle cx="320" cy="60" r="3.5"/><circle cx="480" cy="40" r="3.5"/><circle cx="680" cy="35" r="3.5"/></g>
+              <!-- Simulated detection boxes -->
+              <rect x="100" y="50" width="120" height="90" rx="2" fill="none" stroke="#00ff41" stroke-width="1.5" opacity=".6"/>
+              <rect x="400" y="70" width="100" height="80" rx="2" fill="none" stroke="#ffb000" stroke-width="1.5" opacity=".5"/>
+            </svg>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent"></div>
+            <!-- Overlay badges -->
+            <div class="absolute top-3 left-3 flex gap-2">
+              <span class="font-mono text-xs font-bold px-2 py-0.5 rounded-sm border border-terminal-green/40 bg-terminal-green/10 text-terminal-green" style="font-size:10px">95%+ ACCURACY</span>
+              <span class="font-mono text-xs font-bold px-2 py-0.5 rounded-sm border border-terminal-amber/40 bg-terminal-amber/20 text-terminal-amber" style="font-size:10px">80% REDUCTION</span>
+            </div>
+            <!-- Detection boxes -->
+            <div class="detection-box" style="top:55px;left:105px;width:115px;height:80px"><span class="detection-label">defect: 0.97</span></div>
+            <div class="detection-box" style="top:75px;left:405px;width:95px;height:70px;border-color:var(--terminal-amber);box-shadow:0 0 8px rgba(255,176,0,.4)"><span class="detection-label" style="color:var(--terminal-amber)">anomaly: 0.89</span></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-mono text-2xl font-bold text-terminal-green glow-green mb-3">SmartDetect</h3>
+            <p class="font-mono text-xs text-terminal-muted leading-relaxed mb-4">AI-based image anomaly detection &amp; correction system. Automates defect detection using YOLOv8 with data-driven analysis — reducing manual inspection by ~80% and achieving 95%+ accuracy on test datasets. Includes automated PDF reporting and real-time data visualization.</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge">Python</span><span class="tech-badge">YOLOv8</span><span class="tech-badge">OpenCV</span><span class="tech-badge">Streamlit</span><span class="tech-badge">Pandas</span><span class="tech-badge">Roboflow API</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mb-4">
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-green">&#9670;</span> Batch image processing (hundreds per run)</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-green">&#9670;</span> YOLOv8 + Roboflow API integration</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-green">&#9670;</span> Real-time bounding box visualization</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-green">&#9670;</span> Automated PDF reporting &amp; export</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-green">&#9670;</span> Confidence scoring system</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-green">&#9670;</span> Correction suggestion engine</div>
+            </div>
+            <div class="grid grid-cols-3 gap-3 mb-4">
+              <div class="text-center p-3 border border-terminal-green/20 rounded-sm bg-terminal-green/5">
+                <div class="font-mono text-xl font-bold text-terminal-green glow-green">95%+</div>
+                <div class="font-mono text-xs text-terminal-dim mt-1">Detection Accuracy</div>
+              </div>
+              <div class="text-center p-3 border border-terminal-amber/15 rounded-sm" style="background:rgba(255,176,0,.03)">
+                <div class="font-mono text-xl font-bold text-terminal-amber" style="text-shadow:var(--glow-amber)">~80%</div>
+                <div class="font-mono text-xs text-terminal-dim mt-1">Manual Reduction</div>
+              </div>
+              <div class="text-center p-3 border border-terminal-green/10 rounded-sm" style="background:rgba(0,255,255,.02)">
+                <div class="font-mono text-xl font-bold text-terminal-cyan" style="text-shadow:var(--glow-cyan)">&infin; imgs</div>
+                <div class="font-mono text-xs text-terminal-dim mt-1">Batch Processing</div>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <a href="https://github.com/arifurrahmancareer/SMART-DETECT-AI-BASED-ANOMALY-DETECTION-AND-CORRECTION" target="_blank" class="group inline-flex items-center gap-2 font-mono text-xs border border-terminal-green/40 text-terminal-green px-4 py-2 rounded-sm hover:bg-terminal-green/10 transition-all">$ git clone <span class="group-hover:translate-x-1 transition-transform">-&gt;</span></a>
+              <a href="https://smart-detect-ai-based-anomaly-detection-and-correction-huxxubn.streamlit.app/" target="_blank" class="group inline-flex items-center gap-2 font-mono text-xs border border-terminal-amber/40 text-terminal-amber px-4 py-2 rounded-sm hover:bg-terminal-amber/10 transition-all">$ ./demo <span class="group-hover:translate-x-1 transition-transform">-&gt;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Analysis Portfolio SECONDARY -->
+      <div class="bento-secondary reveal-on-scroll" style="transition-delay:120ms">
+        <div class="terminal-window" style="height:100%">
+          <div class="terminal-titlebar">
+            <div class="terminal-dot" style="background:#ff5f57"></div>
+            <div class="terminal-dot" style="background:#ffbd2e"></div>
+            <div class="terminal-dot" style="background:#28ca42"></div>
+            <span class="font-mono text-xs text-terminal-dim ml-2">DataVisualization/</span>
+          </div>
+          <div class="relative h-36 overflow-hidden" style="background:#080a0c">
+            <svg viewBox="0 0 400 144" style="width:100%;height:100%;opacity:.35">
+              <polyline points="10,120 50,95 90,100 130,55 170,75 210,35 250,60 290,25 330,50 370,15" fill="none" stroke="#00ff41" stroke-width="2"/>
+              <polyline points="10,130 50,110 90,115 130,80 170,95 210,60 250,80 290,50 330,70 370,40" fill="none" stroke="#ffb000" stroke-width="1.5" stroke-dasharray="5,3"/>
+            </svg>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent"></div>
+            <div class="absolute top-3 left-3 flex gap-2">
+              <span class="font-mono text-xs font-bold px-2 py-0.5 rounded-sm border border-terminal-amber/40 bg-terminal-amber/20 text-terminal-amber" style="font-size:10px">Power BI &middot; LIVE</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-mono text-xl font-bold text-terminal-green glow-green mb-3">Data Analysis &amp; Visualization Portfolio</h3>
+            <p class="font-mono text-xs text-terminal-muted leading-relaxed mb-4">Comprehensive data analytics portfolio featuring EDA, interactive Power BI dashboards, statistical analysis, and advanced data cleaning pipelines on real-world datasets using Python and SQL.</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tech-badge-amber tech-badge">Python</span><span class="tech-badge-amber tech-badge">SQL</span><span class="tech-badge-amber tech-badge">Power BI</span><span class="tech-badge-amber tech-badge">Pandas</span><span class="tech-badge-amber tech-badge">NumPy</span><span class="tech-badge-amber tech-badge">Matplotlib</span><span class="tech-badge-amber tech-badge">Excel</span>
+            </div>
+            <div class="space-y-1.5 mb-4">
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-amber">&#9675;</span> Interactive Power BI dashboards with dynamic filtering</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-amber">&#9675;</span> EDA with Pandas &amp; NumPy on real-world datasets</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-amber">&#9675;</span> IQR &amp; Z-score outlier detection techniques</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-amber">&#9675;</span> SQL-based data transformation &amp; querying</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-amber">&#9675;</span> Advanced data cleaning &amp; preprocessing pipelines</div>
+              <div class="font-mono text-xs text-terminal-muted flex items-center gap-1.5"><span class="text-terminal-amber">&#9675;</span> Statistical analysis &amp; visualization with Matplotlib</div>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+              <div class="text-center p-3 border border-terminal-amber/15 rounded-sm" style="background:rgba(255,176,0,.03)"><div class="font-mono font-bold text-terminal-amber" style="text-shadow:var(--glow-amber)">Dynamic</div><div class="font-mono text-xs text-terminal-dim mt-1">Filtering</div></div>
+              <div class="text-center p-3 border border-terminal-amber/15 rounded-sm" style="background:rgba(255,176,0,.03)"><div class="font-mono font-bold text-terminal-amber" style="text-shadow:var(--glow-amber)">IQR+Z</div><div class="font-mono text-xs text-terminal-dim mt-1">Outlier Methods</div></div>
+              <div class="text-center p-3 border border-terminal-green/10 rounded-sm" style="background:rgba(0,255,255,.02)"><div class="font-mono font-bold text-terminal-cyan" style="text-shadow:var(--glow-cyan)">SQL</div><div class="font-mono text-xs text-terminal-dim mt-1">Data Transform</div></div>
+            </div>
+            <a href="#" class="group inline-flex items-center gap-2 font-mono text-xs border border-terminal-green/40 text-terminal-green px-4 py-2 rounded-sm hover:bg-terminal-green/10 transition-all">$ git clone <span class="group-hover:translate-x-1 transition-transform">-&gt;</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="font-mono text-xs text-terminal-dim mt-8 reveal-on-scroll">$ echo "2 data analytics projects found &middot; 0 errors &middot; exit code 0"</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ STACK ═══════════════════ -->
+<section id="stack" class="py-32 px-6 relative overflow-hidden bg-bg-secondary/30">
+  <div class="section-watermark">STACK</div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="reveal-on-scroll mb-12">
+      <div class="font-mono text-xs text-terminal-dim mb-2">$ cat ~/.analytics_stack</div>
+      <h2 class="font-mono font-bold text-3xl md:text-5xl text-terminal-green glow-green mb-3">./analytics_tools</h2>
+      <div class="font-mono text-xs text-terminal-dim">5 categories &middot; 24 tools &middot; continuously updating</div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Left: Categories -->
+      <div class="space-y-4">
+        <div class="terminal-window reveal-on-scroll"><div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">lang.conf</span></div><div class="terminal-content"><div class="font-mono text-xs font-bold text-terminal-green mb-3" style="letter-spacing:2px"># LANGUAGES</div><div class="flex flex-wrap gap-1.5"><span class="tech-badge">Python</span><span class="tech-badge">SQL</span></div></div></div>
+
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:80ms"><div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">analytics.conf</span></div><div class="terminal-content"><div class="font-mono text-xs font-bold text-terminal-amber mb-3" style="letter-spacing:2px"># DATA ANALYTICS &amp; VISUALIZATION</div><div class="flex flex-wrap gap-1.5"><span class="tech-badge-amber tech-badge">Power BI</span><span class="tech-badge-amber tech-badge">Excel (Advanced)</span><span class="tech-badge-amber tech-badge">Matplotlib</span><span class="tech-badge-amber tech-badge">Seaborn</span><span class="tech-badge-amber tech-badge">Plotly</span></div></div></div>
+
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:160ms"><div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">lib.conf</span></div><div class="terminal-content"><div class="font-mono text-xs font-bold text-terminal-cyan mb-3" style="letter-spacing:2px"># DATA SCIENCE LIBRARIES</div><div class="flex flex-wrap gap-1.5"><span class="tech-badge-cyan tech-badge">Pandas</span><span class="tech-badge-cyan tech-badge">NumPy</span><span class="tech-badge-cyan tech-badge">Scikit-learn</span><span class="tech-badge-cyan tech-badge">Streamlit</span><span class="tech-badge-cyan tech-badge">OpenCV</span><span class="tech-badge-cyan tech-badge">YOLOv8</span></div></div></div>
+
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:240ms"><div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">techniques.conf</span></div><div class="terminal-content"><div class="font-mono text-xs font-bold text-terminal-green mb-3" style="letter-spacing:2px"># ANALYTICS TECHNIQUES</div><div class="flex flex-wrap gap-1.5"><span class="tech-badge">EDA</span><span class="tech-badge">Statistical Analysis</span><span class="tech-badge">Data Cleaning</span><span class="tech-badge">Outlier Detection</span><span class="tech-badge">Data Visualization</span><span class="tech-badge">Feature Engineering</span></div></div></div>
+
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:320ms"><div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">tool.conf</span></div><div class="terminal-content"><div class="font-mono text-xs font-bold text-terminal-amber mb-3" style="letter-spacing:2px"># DEVELOPER TOOLS</div><div class="flex flex-wrap gap-1.5"><span class="tech-badge-amber tech-badge">Jupyter Notebook</span><span class="tech-badge-amber tech-badge">Google Colab</span><span class="tech-badge-amber tech-badge">VS Code</span><span class="tech-badge-amber tech-badge">Git</span><span class="tech-badge-amber tech-badge">GitHub</span></div></div></div>
+      </div>
+
+      <!-- Right: Proficiency Bars -->
+      <div class="terminal-window reveal-on-scroll" style="transition-delay:150ms">
+        <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">proficiency.sh</span></div>
+        <div class="terminal-content">
+          <div class="font-mono text-xs text-terminal-dim mb-4">$ ./measure_proficiency --analytics</div>
+          <div class="space-y-3" id="profBars">
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">Python</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="90"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">90%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">Pandas</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="88"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">88%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">NumPy</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="85"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">85%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">SQL</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="75" style="background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber))"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">75%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">Power BI</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="80" style="background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber))"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">80%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">Matplotlib</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="83" style="background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber))"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">83%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">Scikit-learn</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="78" style="background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber))"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">78%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">OpenCV</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="82" style="background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber))"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">82%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">YOLOv8</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="80" style="background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber))"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">80%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">Streamlit</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="85"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">85%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">Statistical Analysis</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="80" style="background:linear-gradient(90deg,rgba(255,176,0,.4),var(--terminal-amber))"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">80%</span></div>
+            <div class="flex items-center gap-3"><span class="font-mono text-xs text-terminal-muted" style="min-width:130px">Data Cleaning</span><div class="progress-bar-track flex-1"><div class="progress-bar-fill" data-width="87"></div></div><span class="font-mono text-xs text-terminal-dim" style="min-width:32px;text-align:right">87%</span></div>
+          </div>
+          <div class="flex gap-4 mt-4 font-mono text-xs text-terminal-dim">
+            <span><span style="display:inline-block;width:8px;height:8px;background:var(--terminal-green);border-radius:2px;margin-right:4px"></span>expert</span>
+            <span><span style="display:inline-block;width:8px;height:8px;background:var(--terminal-amber);border-radius:2px;margin-right:4px"></span>proficient</span>
+            <span style="margin-left:auto">last updated: 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ STATS ═══════════════════ -->
+<section id="stats" class="py-32 px-6 relative overflow-hidden">
+  <div class="section-watermark">STATS</div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="reveal-on-scroll mb-12">
+      <div class="font-mono text-xs text-terminal-dim mb-2">$ ./run_analytics --summary</div>
+      <h2 class="font-mono font-bold text-3xl md:text-5xl text-terminal-green glow-green mb-3">./analytics_stats && ./certifications</h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <!-- Left 3/5 -->
+      <div class="lg:col-span-3 space-y-6">
+        <!-- Counters -->
+        <div class="grid grid-cols-2 gap-4 reveal-on-scroll">
+          <div class="terminal-window p-5 text-center"><div class="font-mono text-3xl font-bold text-terminal-green glow-green counter-animate" data-target="95" data-suffix="%+">0</div><div class="font-mono text-xs text-terminal-dim mt-2">Detection Accuracy</div></div>
+          <div class="terminal-window p-5 text-center"><div class="font-mono text-3xl font-bold text-terminal-amber counter-animate" style="text-shadow:var(--glow-amber)" data-target="80" data-prefix="~" data-suffix="%">0</div><div class="font-mono text-xs text-terminal-dim mt-2">Manual Reduction</div></div>
+          <div class="terminal-window p-5 text-center"><div class="font-mono text-3xl font-bold text-terminal-green glow-green counter-animate" data-target="2">0</div><div class="font-mono text-xs text-terminal-dim mt-2">Data Projects</div></div>
+          <div class="terminal-window p-5 text-center"><div class="font-mono text-3xl font-bold text-terminal-cyan counter-animate" style="text-shadow:var(--glow-cyan)" data-target="3">0</div><div class="font-mono text-xs text-terminal-dim mt-2">Certifications</div></div>
+        </div>
+
+        <!-- Language breakdown -->
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:100ms">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">language_breakdown.json</span></div>
+          <div class="terminal-content">
+            <div class="font-mono text-xs text-terminal-dim mb-3">$ analyze --language-usage --projects</div>
+            <div class="flex h-2.5 rounded-full overflow-hidden mb-3">
+              <div style="width:72%;background:var(--terminal-green)"></div>
+              <div style="width:18%;background:var(--terminal-amber)"></div>
+              <div style="width:7%;background:var(--terminal-cyan)"></div>
+              <div style="width:3%;background:#4A7A4A"></div>
+            </div>
+            <div class="flex flex-wrap gap-4 font-mono text-xs text-terminal-muted">
+              <span class="flex items-center gap-1.5"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--terminal-green)"></span>Python 72%</span>
+              <span class="flex items-center gap-1.5"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--terminal-amber)"></span>Jupyter 18%</span>
+              <span class="flex items-center gap-1.5"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--terminal-cyan)"></span>SQL 7%</span>
+              <span class="flex items-center gap-1.5"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#4A7A4A"></span>Other 3%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:200ms">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">achievements.log</span></div>
+          <div class="terminal-content">
+            <div class="font-mono text-xs text-terminal-dim mb-3">$ cat key_achievements.log</div>
+            <div class="space-y-3">
+              <div class="flex items-start gap-2 font-mono text-xs text-terminal-muted leading-relaxed"><span class="text-terminal-green mt-0.5">&#9670;</span>Built SmartDetect achieving 95%+ defect detection accuracy</div>
+              <div class="flex items-start gap-2 font-mono text-xs text-terminal-muted leading-relaxed"><span class="text-terminal-amber mt-0.5">&#9675;</span>Reduced manual inspection by ~80% through automated data pipelines</div>
+              <div class="flex items-start gap-2 font-mono text-xs text-terminal-muted leading-relaxed"><span class="text-terminal-cyan mt-0.5">&#9670;</span>Constructed interactive Power BI dashboards with dynamic filtering</div>
+              <div class="flex items-start gap-2 font-mono text-xs text-terminal-muted leading-relaxed"><span class="text-terminal-green mt-0.5">&#9670;</span>Applied IQR &amp; Z-score outlier detection on real-world datasets</div>
+              <div class="flex items-start gap-2 font-mono text-xs text-terminal-muted leading-relaxed"><span class="text-terminal-amber mt-0.5">&#9675;</span>Automated PDF reporting &amp; batch image processing workflows</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 2/5: Certs & Education -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="font-mono text-xs text-terminal-dim mb-2 reveal-on-scroll">$ ls ~/certifications/</div>
+
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:100ms">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">cert_01.json</span></div>
+          <div class="terminal-content"><div class="font-mono text-sm font-bold text-terminal-green glow-green mb-1">Introduction to Data Science</div><div class="font-mono text-xs text-terminal-dim mb-3">Cisco Networking Academy</div><div class="flex flex-wrap gap-1.5"><span class="tech-badge">Data Collection</span><span class="tech-badge">Analysis Pipelines</span><span class="tech-badge">ML Fundamentals</span><span class="tech-badge">Data Visualization</span></div></div>
+        </div>
+
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:200ms">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">cert_02.json</span></div>
+          <div class="terminal-content"><div class="font-mono text-sm font-bold text-terminal-amber mb-1" style="text-shadow:var(--glow-amber)">Master Python Programming</div><div class="font-mono text-xs text-terminal-dim mb-3">Srinivas Rao (Udemy)</div><div class="flex flex-wrap gap-1.5"><span class="tech-badge-amber tech-badge">OOP</span><span class="tech-badge-amber tech-badge">Data Structures</span><span class="tech-badge-amber tech-badge">Automation</span><span class="tech-badge-amber tech-badge">Pandas &amp; NumPy</span></div></div>
+        </div>
+
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:300ms">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">cert_03.json</span></div>
+          <div class="terminal-content"><div class="font-mono text-sm font-bold text-terminal-cyan mb-1" style="text-shadow:var(--glow-cyan)">Generative AI for HR Professionals</div><div class="font-mono text-xs text-terminal-dim mb-3">GenMan Solutions</div><div class="flex flex-wrap gap-1.5"><span class="tech-badge-cyan tech-badge">Prompt Engineering</span><span class="tech-badge-cyan tech-badge">LLM Integration</span><span class="tech-badge-cyan tech-badge">Workflow Automation</span></div></div>
+        </div>
+
+        <!-- Education -->
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:400ms">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">education.log</span></div>
+          <div class="terminal-content space-y-3">
+            <div class="flex justify-between items-start"><div><div class="font-mono text-xs text-terminal-green font-bold">B.Tech CSE</div><div class="font-mono text-xs text-terminal-muted mt-1">Hooghly Engg. &amp; Tech. College (MAKAUT)</div></div><div class="font-mono text-xs text-terminal-dim">2022-2026</div></div>
+            <div class="border-t border-terminal-green/10 pt-3 flex justify-between items-start"><div><div class="font-mono text-xs text-terminal-green font-bold">H.S (WBCHSE)</div><div class="font-mono text-xs text-terminal-muted mt-1">Ranagarh High School (H.S) &middot; 77%</div></div><div class="font-mono text-xs text-terminal-dim">2022</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<section id="contact" class="py-32 px-6 relative overflow-hidden bg-bg-secondary/30">
+  <div class="section-watermark">CONTACT</div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="reveal-on-scroll mb-12">
+      <div class="font-mono text-xs text-terminal-dim mb-2">$ ./send_message --to arifur_rahman</div>
+      <h2 class="font-mono font-bold text-3xl md:text-5xl text-terminal-green glow-green mb-3">./contact</h2>
+      <div class="font-mono text-xs text-terminal-dim">Open to internships, collaborations, and open-source contributions</div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <!-- Left 2/5 -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="terminal-window reveal-on-scroll">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">contact_info.sh</span></div>
+          <div class="terminal-content space-y-3">
+            <div class="flex items-center gap-3 font-mono text-xs"><span class="text-terminal-dim">EMAIL</span><a href="mailto:rahmanarifur.career@gmail.com" class="text-terminal-green glow-green hover:opacity-80 transition-opacity">rahmanarifur.career@gmail.com</a></div>
+            <div class="flex items-center gap-3 font-mono text-xs"><span class="text-terminal-dim">PHONE</span><a href="tel:+919641556790" class="text-terminal-muted hover:text-terminal-green transition-colors">+91 9641556790</a></div>
+            <div class="flex items-center gap-3 font-mono text-xs"><span class="text-terminal-dim">LOCATION</span><span class="text-terminal-muted">Hooghly, West Bengal, India</span></div>
+          </div>
+        </div>
+
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:80ms">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">links.sh</span></div>
+          <div class="terminal-content space-y-1">
+            <a href="https://github.com/arifurrahmancareer" target="_blank" class="group flex items-center gap-2 font-mono text-xs text-terminal-muted hover:text-terminal-green py-2 border-b border-terminal-green/10 transition-colors"><span class="text-terminal-green">&#9670;</span>./github <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 transition-transform">-&gt;</span></a>
+            <a href="https://www.linkedin.com/in/arifur-rahman-a73558374" target="_blank" class="group flex items-center gap-2 font-mono text-xs text-terminal-muted hover:text-terminal-green py-2 border-b border-terminal-green/10 transition-colors"><span class="text-terminal-cyan">&#9670;</span>./linkedin <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 transition-transform">-&gt;</span></a>
+            <a href="#" class="group flex items-center gap-2 font-mono text-xs text-terminal-muted hover:text-terminal-green py-2 transition-colors"><span class="text-terminal-amber">&#9670;</span>./portfolio <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 transition-transform">-&gt;</span></a>
+          </div>
+        </div>
+
+        <!-- Availability -->
+        <div class="terminal-window reveal-on-scroll" style="transition-delay:160ms">
+          <div class="terminal-content">
+            <div class="flex items-center gap-2 font-mono text-xs font-bold text-terminal-green mb-3"><span class="w-2 h-2 rounded-full bg-terminal-green dot-pulse"></span>AVAILABLE FOR OPPORTUNITIES</div>
+            <div class="space-y-1.5 font-mono text-xs text-terminal-muted">
+              <div class="flex items-center gap-2"><span class="text-terminal-green">&#10003;</span>Data Analyst roles (internship/full-time)</div>
+              <div class="flex items-center gap-2"><span class="text-terminal-green">&#10003;</span>Business Intelligence projects</div>
+              <div class="flex items-center gap-2"><span class="text-terminal-green">&#10003;</span>Data Science research</div>
+              <div class="flex items-center gap-2"><span class="text-terminal-green">&#10003;</span>Freelance data analysis &amp; dashboards</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 3/5: Contact Form -->
+      <div class="lg:col-span-3 reveal-on-scroll" style="transition-delay:100ms">
+        <div class="terminal-window">
+          <div class="terminal-titlebar"><div class="terminal-dot" style="background:#ff5f57"></div><div class="terminal-dot" style="background:#ffbd2e"></div><div class="terminal-dot" style="background:#28ca42"></div><span class="font-mono text-xs text-terminal-dim ml-2">send_message.sh</span></div>
+          <div class="terminal-content">
+            <div class="font-mono text-xs text-terminal-dim mb-6">$ ./send_message --interactive</div>
+            <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-4">
+              <div><div class="font-mono text-xs text-terminal-dim mb-2">--name [required]</div><input type="text" class="terminal-input" placeholder="your_name" required /></div>
+              <div><div class="font-mono text-xs text-terminal-dim mb-2">--email [required]</div><input type="email" class="terminal-input" placeholder="your@email.com" required /></div>
+              <div><div class="font-mono text-xs text-terminal-dim mb-2">--message [required]</div><textarea class="terminal-input resize-none" rows="5" placeholder="your message here..." required></textarea></div>
+              <button type="submit" class="border-beam-wrapper w-full font-mono text-sm font-bold py-4 rounded-sm transition-all" style="background:rgba(0,255,65,.08);border:1px solid rgba(0,255,65,.3);color:var(--terminal-green)">$ ./send --execute</button>
+            </form>
+            <div class="font-mono text-xs text-terminal-dim mt-4 text-center">Response time: &lt; 24 hours &middot; No spam, ever.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="border-t border-terminal-green/15 py-8 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <img src="assets/images/app_logo.png" alt="Logo" width="20" height="20" style="border-radius:4px" />
+      <span class="font-mono text-xs text-terminal-dim">&copy; 2026 Arifur Rahman</span>
+    </div>
+    <div class="flex gap-6">
+      <a href="https://github.com/arifurrahmancareer" target="_blank" class="font-mono text-xs text-terminal-dim hover:text-terminal-green transition-colors">GitHub</a>
+      <a href="https://www.linkedin.com/in/arifur-rahman-a73558374" target="_blank" class="font-mono text-xs text-terminal-dim hover:text-terminal-green transition-colors">LinkedIn</a>
+      <a href="mailto:rahmanarifur.career@gmail.com" class="font-mono text-xs text-terminal-dim hover:text-terminal-green transition-colors">Email</a>
+      <a href="#contact" class="font-mono text-xs text-terminal-dim hover:text-terminal-green transition-colors">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+// Boot Sequence
+(function() {
+  var lines = document.querySelectorAll('.boot-line');
+  var overlay = document.getElementById('boot-overlay');
+  var hero = document.querySelector('.hero-main');
+  lines.forEach(function(line, i) {
+    setTimeout(function() { line.classList.add('show'); }, 200 + i * 320);
+  });
+  setTimeout(function() {
+    overlay.classList.add('hidden');
+    hero.classList.add('show');
+  }, 200 + lines.length * 320 + 600);
+})();
+
+// Typewriter
+(function() {
+  var el = document.getElementById('typewriter-text');
+  var phrases = ['Data Analyst', 'Python Developer', 'Power BI Expert', 'ML Enthusiast', 'CS Student'];
+  var pIdx = 0, cIdx = 0, deleting = false;
+  function tick() {
+    var phrase = phrases[pIdx];
+    if (!deleting) {
+      el.textContent = phrase.substring(0, cIdx + 1);
+      cIdx++;
+      if (cIdx === phrase.length) { deleting = true; setTimeout(tick, 2000); return; }
+    } else {
+      el.textContent = phrase.substring(0, cIdx - 1);
+      cIdx--;
+      if (cIdx === 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; }
+    }
+    setTimeout(tick, deleting ? 40 : 80);
+  }
+  setTimeout(tick, 4500);
+})();
+
+// Nav scroll effect
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('mainNav');
+  nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+});
+
+// Parallax orbs
+document.addEventListener('mousemove', function(e) {
+  var x = (e.clientX / window.innerWidth - 0.5) * 20;
+  var y = (e.clientY / window.innerHeight - 0.5) * 20;
+  var o1 = document.getElementById('orb1');
+  var o2 = document.getElementById('orb2');
+  if (o1) o1.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  if (o2) o2.style.transform = 'translate(' + (-x) + 'px,' + (-y) + 'px)';
+});
+
+// Scroll reveal
+(function() {
+  var items = document.querySelectorAll('.reveal-on-scroll');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('revealed'); });
+  }, { threshold: 0.1 });
+  items.forEach(function(el) { observer.observe(el); });
+})();
+
+// Progress bars
+(function() {
+  var box = document.getElementById('profBars');
+  if (!box) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.progress-bar-fill').forEach(function(bar) {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+  observer.observe(box);
+})();
+
+// Counter animation
+(function() {
+  var done = false;
+  var section = document.getElementById('stats');
+  if (!section) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !done) {
+        done = true;
+        document.querySelectorAll('.counter-animate').forEach(function(el) {
+          var target = parseInt(el.dataset.target);
+          var prefix = el.dataset.prefix || '';
+          var suffix = el.dataset.suffix || '';
+          var dur = 2000, start = performance.now();
+          function update(now) {
+            var p = Math.min((now - start) / dur, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = prefix + Math.floor(eased * target) + (p >= 1 ? suffix : '');
+            if (p < 1) requestAnimationFrame(update);
+            else el.textContent = prefix + target + suffix;
+          }
+          requestAnimationFrame(update);
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+  observer.observe(section);
+})();
+
+// Contact form
+function handleSubmit(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector('button[type=submit]');
+  btn.textContent = '$ sending...';
+  btn.style.color = 'var(--terminal-amber)';
+  btn.style.borderColor = 'rgba(255,176,0,.3)';
+  setTimeout(function() {
+    btn.textContent = '$ message_sent! \u2713';
+    btn.style.color = 'var(--terminal-green)';
+    btn.style.borderColor = 'rgba(0,255,65,.3)';
+    e.target.reset();
+    setTimeout(function() {
+      btn.textContent = '$ ./send --execute';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 3000);
+  }, 1500);
+}
+</script>
+</body>
+</html>
